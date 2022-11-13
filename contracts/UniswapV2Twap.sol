@@ -36,4 +36,16 @@ contract UniswapV2Twap {
         price1CumulativeLast = _pair.price1CumulativeLast();
         (, , blockTimestampLast) = _pair.getReserves();
     }
+
+    function update() external {
+        (
+            uint price0Cumulative,
+            uint price1Cumulative,
+            uint32 blockTimestamp
+        ) = UniswapV2OracleLibrary.currentCumulativePrices(address(pair));
+        uint32 timeElapsed = blockTimestamp - blockTimestampLast;
+
+        require(timeElapsed >= PERIOD, "time elapsed < min period");
+
+    }
 }
