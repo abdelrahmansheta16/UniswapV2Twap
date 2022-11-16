@@ -47,5 +47,17 @@ contract UniswapV2Twap {
 
         require(timeElapsed >= PERIOD, "time elapsed < min period");
 
+        // NOTE: overflow is desired
+        /*
+        |----b-------------------------a---------|
+        0                                     2**256 - 1
+
+        b - a is preserved even if b overflows
+        */
+        // NOTE: uint -> uint224 cuts off the bits above uint224
+        // max uint
+        // 0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        // max uint244
+        // 0x00000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffff
     }
 }
