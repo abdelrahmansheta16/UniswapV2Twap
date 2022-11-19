@@ -59,5 +59,11 @@ contract UniswapV2Twap {
         // 0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
         // max uint244
         // 0x00000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        price0Average = FixedPoint.uq112x112(
+            uint224((price0Cumulative - price0CumulativeLast) / timeElapsed)
+        );
+        price1Average = FixedPoint.uq112x112(
+            uint224((price1Cumulative - price1CumulativeLast) / timeElapsed)
+        );
     }
 }
