@@ -65,5 +65,9 @@ contract UniswapV2Twap {
         price1Average = FixedPoint.uq112x112(
             uint224((price1Cumulative - price1CumulativeLast) / timeElapsed)
         );
+
+        price0CumulativeLast = price0Cumulative;
+        price1CumulativeLast = price1Cumulative;
+        blockTimestampLast = blockTimestamp;
     }
 }
