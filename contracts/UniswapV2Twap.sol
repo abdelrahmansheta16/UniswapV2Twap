@@ -70,4 +70,21 @@ contract UniswapV2Twap {
         price1CumulativeLast = price1Cumulative;
         blockTimestampLast = blockTimestamp;
     }
+
+    function consult(address token, uint amountIn)
+        external
+        view
+        returns (uint amountOut)
+    {
+        require(token == token0 || token == token1, "invalid token");
+
+        if (token == token0) {
+            // NOTE: using FixedPoint for *
+            // NOTE: mul returns uq144x112
+            // NOTE: decode144 decodes uq144x112 to uint144
+            amountOut = price0Average.mul(amountIn).decode144();
+        } else {
+            amountOut = price1Average.mul(amountIn).decode144();
+        }
+    }
 }
