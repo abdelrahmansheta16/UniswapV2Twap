@@ -25,4 +25,15 @@ contract UniswapV2Twap {
     // resolution: 1 / 2**112
     FixedPoint.uq112x112 public price0Average;
     FixedPoint.uq112x112 public price1Average;
+
+    // NOTE: public visibility
+    // NOTE: IUniswapV2Pair
+    constructor(IUniswapV2Pair _pair) public {
+        pair = _pair;
+        token0 = _pair.token0();
+        token1 = _pair.token1();
+        price0CumulativeLast = _pair.price0CumulativeLast();
+        price1CumulativeLast = _pair.price1CumulativeLast();
+        (, , blockTimestampLast) = _pair.getReserves();
+    }
 }
