@@ -15,4 +15,8 @@ contract UniswapV2Twap {
     IUniswapV2Pair public immutable pair;
     address public immutable token0;
     address public immutable token1;
+
+    uint public price0CumulativeLast;
+    uint public price1CumulativeLast;
+    uint32 public blockTimestampLast;
 }
